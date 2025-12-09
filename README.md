@@ -28,7 +28,9 @@ A comprehensive web-based movie ticket booking and management system built with 
 ## ✨ Features
 
 ### User Features
+
 - 🔐 **User Authentication & Authorization**
+
   - Email-based registration with verification
   - Secure login system
   - Google OAuth integration
@@ -36,18 +38,21 @@ A comprehensive web-based movie ticket booking and management system built with 
   - Role-based access control (Client/Admin)
 
 - 🎥 **Movie Browsing**
+
   - Browse all available movies
   - View movie details (description, cast, release date)
   - Filter movies by status (Now Showing, Coming Soon)
   - Search functionality
 
 - 🎫 **Booking System**
+
   - Select movie, date, and showtime
   - Choose seats
   - View booking history
   - Cancel bookings
 
 - 💳 **Payment Processing**
+
   - Secure payment integration with Stripe
   - Multiple payment methods
   - Payment confirmation
@@ -58,18 +63,22 @@ A comprehensive web-based movie ticket booking and management system built with 
   - Rating system
 
 ### Admin Features
+
 - 🎬 **Movie Management**
+
   - Add, edit, and delete movies
   - Manage movie schedules (dates and showtimes)
   - Update movie status
   - Upload movie posters
 
 - 👥 **User Management**
+
   - View all registered users
   - Manage user accounts
   - User role management
 
 - 📊 **Booking Management**
+
   - View all bookings
   - Manage booking status
   - Generate booking reports
@@ -81,6 +90,7 @@ A comprehensive web-based movie ticket booking and management system built with 
 ## 🛠 Technology Stack
 
 ### Backend
+
 - **Java 11** - Programming language
 - **Jakarta Servlet API 5.0** - Web framework
 - **Maven 3.6+** - Build and dependency management
@@ -89,12 +99,14 @@ A comprehensive web-based movie ticket booking and management system built with 
 - **Stripe Java SDK 28.1.0** - Payment processing
 
 ### Frontend
+
 - **JSP (JavaServer Pages)** - Server-side rendering
 - **JSTL 2.0** - JSP Standard Tag Library
 - **Tailwind CSS** - Styling framework
 - **JavaScript** - Client-side scripting
 
 ### Tools & Libraries
+
 - **JUnit 3.8.1** - Unit testing
 - **Dotenv Java 2.3.1** - Environment variable management
 
@@ -103,21 +115,25 @@ A comprehensive web-based movie ticket booking and management system built with 
 Before you begin, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 11 or higher**
+
   ```bash
   java -version
   ```
 
 - **Apache Maven 3.6 or higher**
+
   ```bash
   mvn -version
   ```
 
 - **MySQL 5.7+ or MariaDB 10.3+**
+
   ```bash
   mysql --version
   ```
 
 - **Application Server** (choose one):
+
   - Apache Tomcat 9.0+ or higher
   - Jetty 11.0+ or higher
   - Any Jakarta EE compatible server
@@ -139,11 +155,13 @@ cd movie-booking-system/java-project
 ### 2. Database Setup
 
 1. Create a MySQL database:
+
    ```sql
    CREATE DATABASE cinema;
    ```
 
 2. Import the database schema:
+
    ```bash
    mysql -u root -p cinema < ../Database/db.sql
    ```
@@ -176,6 +194,7 @@ mvn clean install
 ```
 
 This will:
+
 - Download all dependencies
 - Compile the source code
 - Run tests (if any)
@@ -204,12 +223,14 @@ db.driver=com.mysql.cj.jdbc.Driver
 ### Application Configuration
 
 Key configuration files:
+
 - `src/main/resources/config/db.properties` - Database settings
 - `src/main/webapp/WEB-INF/web.xml` - Web application deployment descriptor
 
 ### Environment Variables
 
 You can use environment variables for sensitive configuration:
+
 - Database credentials
 - Stripe API keys
 - Email server settings
@@ -238,10 +259,11 @@ The database schema includes sample data. You can customize it according to your
 ### Running Locally
 
 1. **Start MySQL Server**
+
    ```bash
    # On macOS/Linux
    sudo systemctl start mysql
-   
+
    # On Windows
    net start MySQL
    ```
@@ -249,16 +271,18 @@ The database schema includes sample data. You can customize it according to your
 2. **Deploy to Application Server**
 
    **Option A: Using Tomcat**
+
    ```bash
    # Copy WAR file to Tomcat webapps directory
    cp target/Java_Project.war $CATALINA_HOME/webapps/
-   
+
    # Start Tomcat
    $CATALINA_HOME/bin/startup.sh  # Linux/Mac
    $CATALINA_HOME/bin/startup.bat # Windows
    ```
 
    **Option B: Using IDE**
+
    - Import project into IntelliJ IDEA or Eclipse
    - Configure application server
    - Run/debug from IDE
@@ -319,48 +343,72 @@ java-project/
 ## 🔌 API Endpoints
 
 ### Authentication
-- `GET/POST /signup` - User registration
-- `GET/POST /signin` - User login
+
+- `GET/POST /auth/register` - User registration
+- `GET/POST /auth/login` - User login
+- `GET /login` - Google OAuth login
 - `GET /logout` - User logout
-- `GET/POST /forget-password` - Password reset request
-- `GET/POST /reset-password` - Password reset
-- `GET /verify-email` - Email verification
+- `GET/POST /auth/forgot-password` - Password reset request
+- `GET/POST /auth/verify-email-password` - Verify email for password reset
+- `GET/POST /auth/password-verify-code` - Verify reset code
+- `POST /auth/reset-password` - Reset password
+- `GET/POST /auth/verify-email` - Email verification
+- `GET/POST /auth/verify-code` - Verify email code
+- `POST /send-verification-email` - Send verification email
 
 ### Movies
+
 - `GET /home` - Home page with movies
-- `GET /all-movies` - List all movies
+- `GET /movies` - List all movies
 - `GET /movie-details` - Movie details page
+- `GET /about-us` - About us page
 
 ### Bookings
+
 - `GET /booking` - Booking page
 - `POST /booking` - Create booking
 - `GET /user-bookings` - User's booking history
 
+### Reviews
+
+- `GET/POST /add-review` - Add movie review
+
 ### Payment
+
+- `POST /pay-now` - Payment processing
 - `POST /create-checkout-session` - Create Stripe checkout session
 - `POST /stripe-webhook` - Stripe webhook handler
 
 ### Admin
-- `GET /admin/home` - Admin dashboard
+
+- `GET /admin/home` or `/admin/dashboard` - Admin dashboard
 - `GET/POST /admin/movies` - Movie management
-- `GET/POST /admin/users` - User management
+- `GET/POST /admin/user-management` - User management
 - `GET/POST /admin/bookings` - Booking management
-- `GET/POST /admin/reviews` - Review management
+- `GET/POST /admin/manage-reviews` - Review management
+- `GET/POST /admin/admin-management` - Admin account management
+
+### Utility
+
+- `GET /test-database` - Database connection test (development only)
 
 ## 🚢 Deployment
 
 ### Production Deployment
 
 1. **Build for Production**
+
    ```bash
    mvn clean package -Pproduction
    ```
 
 2. **Configure Production Database**
+
    - Update `db.properties` with production database credentials
    - Ensure database is accessible from application server
 
 3. **Deploy WAR File**
+
    - Copy WAR file to application server's webapps directory
    - Configure server settings (port, context path, etc.)
 
@@ -408,28 +456,33 @@ mvn test jacoco:report
 ### Common Issues
 
 **Issue: Database Connection Failed**
+
 - Verify MySQL server is running
 - Check database credentials in `db.properties`
 - Ensure database exists: `CREATE DATABASE cinema;`
 - Check firewall settings
 
 **Issue: WAR File Not Deploying**
+
 - Verify application server is running
 - Check server logs for errors
 - Ensure Java version compatibility (Java 11+)
 - Verify `web.xml` configuration
 
 **Issue: Dependencies Not Found**
+
 - Run `mvn clean install` to download dependencies
 - Check internet connection
 - Verify Maven settings (`~/.m2/settings.xml`)
 
 **Issue: Payment Not Working**
+
 - Verify Stripe API keys are configured
 - Check Stripe webhook endpoint configuration
 - Review server logs for payment errors
 
 **Issue: Email Not Sending**
+
 - Verify email server configuration
 - Check SMTP settings
 - Review email service logs
@@ -468,7 +521,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Development Team** - Year 2 Semester 1 Information Management & Retrieval
 
 ## 🙏 Acknowledgments
 

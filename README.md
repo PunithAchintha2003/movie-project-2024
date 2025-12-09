@@ -521,7 +521,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Development Team** - Year 2 Semester 1 Information Management & Retrieval
+- **Development Team** - Software Engineering 2
 
 ## 🙏 Acknowledgments
 
